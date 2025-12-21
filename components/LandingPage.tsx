@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { NeonOrbs } from "@/components/NeonOrbs";
 
 // Animation variants
 const fadeIn = {
@@ -62,7 +63,10 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/10 selection:text-primary">
+    <div className="min-h-screen text-foreground selection:bg-primary/10 selection:text-primary relative">
+      {/* Background */}
+      <NeonOrbs />
+
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
@@ -157,7 +161,7 @@ export default function LandingPage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 bg-secondary/30">
+        <section id="about" className="py-24 bg-secondary/10 backdrop-blur-sm">
           <div className="container mx-auto px-6">
             <motion.div
               initial="hidden"
@@ -217,7 +221,7 @@ export default function LandingPage() {
                   <motion.div
                     key={index}
                     variants={fadeIn}
-                    className="p-6 rounded-2xl bg-card border hover:shadow-lg transition-shadow"
+                    className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border hover:shadow-lg transition-shadow"
                   >
                     <category.icon className="w-10 h-10 text-primary mb-4" />
                     <h3 className="font-semibold text-xl mb-3">{category.label}</h3>
@@ -236,7 +240,7 @@ export default function LandingPage() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-24 bg-secondary/30">
+        <section id="projects" className="py-24 bg-secondary/10 backdrop-blur-sm">
           <div className="container mx-auto px-6">
             <motion.div
               initial="hidden"
@@ -254,9 +258,9 @@ export default function LandingPage() {
                   <motion.div
                     key={item}
                     variants={fadeIn}
-                    className="group relative bg-background rounded-2xl overflow-hidden border hover:border-primary/50 transition-colors"
+                    className="group relative bg-background/50 backdrop-blur-md rounded-2xl overflow-hidden border hover:border-primary/50 transition-colors"
                   >
-                    <div className="aspect-video bg-muted relative overflow-hidden">
+                    <div className="aspect-video bg-muted/50 relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                             <div className="flex gap-4">
                                 <Button size="sm" variant="secondary" className="h-8">Demo</Button>

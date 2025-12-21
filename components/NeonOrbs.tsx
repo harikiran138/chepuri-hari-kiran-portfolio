@@ -10,7 +10,7 @@ export function NeonOrbs() {
   }, [])
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-white dark:bg-[#050a18] transition-colors duration-500">
+    <div className="fixed inset-0 -z-10 w-full h-full overflow-hidden flex items-center justify-center bg-white transition-colors duration-500 pointer-events-none">
       {/* Top-left orb */}
       <div
         className={`absolute transition-all duration-1000 ease-out ${
@@ -96,39 +96,7 @@ export function NeonOrbs() {
         </div>
       </div>
 
-      {/* Center text */}
-      <div className="relative z-10 text-center text-indigo-900 dark:text-white transition-colors duration-500">
-        <h1 
-          className={`text-4xl md:text-7xl font-extralight tracking-[0.2em] mb-4 transition-all duration-1000 ease-out ${
-            mounted 
-              ? "opacity-100 translate-y-0 blur-0" 
-              : "opacity-0 translate-y-8 blur-sm"
-          }`}
-          style={{ transitionDelay: "500ms" }}
-        >
-          {"BEYOND LIMITS".split("").map((char, i) => (
-            <span
-              key={i}
-              className={`inline-block transition-all duration-500 ${
-                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-              style={{ transitionDelay: `${800 + i * 50}ms` }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p 
-          className={`text-lg md:text-xl font-light tracking-widest text-indigo-600/60 dark:text-white/60 transition-all duration-1000 ease-out ${
-            mounted 
-              ? "opacity-100 translate-y-0 blur-0" 
-              : "opacity-0 translate-y-4 blur-sm"
-          }`}
-          style={{ transitionDelay: "1500ms" }}
-        >
-          THE FUTURE IS NOW
-        </p>
-      </div>
+      {/* Note: I removed the centered "BEYOND LIMITS" text as this is now a background component. */}
 
       <style jsx global>{`
         .beam-container {
@@ -152,10 +120,7 @@ export function NeonOrbs() {
           box-shadow: 0 0 20px 4px rgba(99, 102, 241, 0.6), 0 0 40px 8px rgba(129, 140, 248, 0.3);
         }
         
-        .dark .beam-light {
-          background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.5) 30%, rgba(150, 200, 255, 0.9) 70%, white 100%);
-          box-shadow: 0 0 20px 4px rgba(100, 180, 255, 0.8), 0 0 40px 8px rgba(59, 130, 246, 0.4);
-        }
+
         
         .orb-light {
           background: radial-gradient(circle at 50% 50%, #f0f4ff 0%, #f0f4ff 90%, transparent 100%);
@@ -166,14 +131,7 @@ export function NeonOrbs() {
           border: 1px solid rgba(99, 102, 241, 0.4);
         }
         
-        .dark .orb-light {
-          background: radial-gradient(circle at 50% 50%, #050a18 0%, #050a18 90%, transparent 100%);
-          box-shadow: 
-            0 0 60px 2px rgba(59, 130, 246, 0.4),
-            0 0 100px 5px rgba(59, 130, 246, 0.2),
-            inset 0 0 60px 2px rgba(59, 130, 246, 0.1);
-          border: 1px solid rgba(100, 180, 255, 0.3);
-        }
+
         
         .beam-spin-6 {
           animation: spin 6s linear infinite;
