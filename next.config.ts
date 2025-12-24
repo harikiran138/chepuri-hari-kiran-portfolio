@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: 'raw.githubusercontent.com',
         pathname: '/appbrewery/webdev/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
     ],
   },
 };

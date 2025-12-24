@@ -225,20 +225,30 @@ export default function LandingPage() {
 
   const aboutRef = useRef<HTMLDivElement>(null);
 
+  // About Section Variants - Static as requested
   const revealVariants = {
-    visible: (i: number) => ({
+    visible: {
       y: 0,
       opacity: 1,
       filter: "blur(0px)",
-      transition: {
-        delay: i * 0.3,
-        duration: 0.7,
-      },
-    }),
+    },
     hidden: {
-      filter: "blur(10px)",
-      y: 40,
-      opacity: 0,
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+    },
+  };
+  
+  const scaleVariants = {
+    visible: {
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1,
+    },
+    hidden: {
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1,
     },
   };
 
@@ -378,7 +388,7 @@ export default function LandingPage() {
               {/* Header with social icons */}
               <div className="flex justify-between items-center mb-8 w-[95%] md:w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-12 z-10 left-0 right-0 mx-auto md:mx-0">
                 <div className="flex items-center gap-2 text-xl">
-                  <span className="text-primary animate-spin">✱</span>
+                  <span className="text-primary">✱</span>
                   <TimelineContent
                     as="span"
                     animationNum={0}
@@ -433,21 +443,13 @@ export default function LandingPage() {
                 as="figure"
                 animationNum={4}
                 timelineRef={aboutRef}
-                customVariants={{
-                   visible: (i: number) => ({
-                      opacity: 1,
-                      filter: "blur(0px)",
-                      scale: 1,
-                      transition: { delay: i * 0.4, duration: 0.5 },
-                    }),
-                    hidden: { filter: "blur(10px)", opacity: 0, scale: 0.95 },
-                }}
+                customVariants={scaleVariants}
                 className="relative group mt-16 md:mt-0"
               >
                 <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl">
                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                    <Image
-                    src="/Users/chepuriharikiran/.gemini/antigravity/brain/79ff0764-7f19-45fe-bf50-b9f833df4b88/about_me_bg_accent_1766541031573.png"
+                    src="https://placehold.co/800x400/png"
                     alt="About Me Banner"
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -504,20 +506,7 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-3 gap-12 mt-12 mb-12">
               <div className="md:col-span-2 space-y-8">
                 <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[120%] font-semibold text-foreground mb-4">
-                  <VerticalCutReveal
-                    splitBy="words"
-                    staggerDuration={0.1}
-                    staggerFrom="first"
-                    reverse={true}
-                    transition={{
-                      type: "spring",
-                      stiffness: 250,
-                      damping: 30,
-                      delay: 0.2,
-                    }}
-                  >
-                    Building Intelligent Systems that Scale.
-                  </VerticalCutReveal>
+                  Building Intelligent Systems that Scale.
                 </h1>
               </div>
 
