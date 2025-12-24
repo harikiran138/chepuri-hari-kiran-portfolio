@@ -52,6 +52,7 @@ import {
   Settings2,
 } from "lucide-react";
 import { NeonOrbs } from "@/components/NeonOrbs";
+import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 
 // SVG Logos
 const TypeScriptIcon = ({ className }: { className?: string }) => (
@@ -370,72 +371,215 @@ export default function LandingPage() {
           </motion.div>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-32 relative">
-          <div className="container mx-auto px-6">
-            <div className="max-w-6xl mx-auto">
-              {/* Professional Header */}
-              <div className="flex items-center gap-6 mb-16">
-                <motion.h2 
-                  variants={fadeIn} 
-                  className="text-4xl md:text-5xl font-bold tracking-tight text-foreground"
-                >
-                  About Me
-                </motion.h2>
-                <motion.div 
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "100px" }}
-                  transition={{ duration: 0.8 }}
-                  className="h-[1px] bg-primary/30 hidden md:block"
-                />
+        {/* About Section - Redesigned with Timeline & Reveal */}
+        <section id="about" className="py-24 px-4" ref={aboutRef}>
+          <div className="max-w-6xl mx-auto">
+            <div className="relative">
+              {/* Header with social icons */}
+              <div className="flex justify-between items-center mb-8 w-[95%] md:w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-12 z-10 left-0 right-0 mx-auto md:mx-0">
+                <div className="flex items-center gap-2 text-xl">
+                  <span className="text-primary animate-spin">✱</span>
+                  <TimelineContent
+                    as="span"
+                    animationNum={0}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="text-sm font-medium text-muted-foreground"
+                  >
+                    WHO I AM
+                  </TimelineContent>
+                </div>
+                <div className="flex gap-4">
+                  <TimelineContent
+                    as="a"
+                    animationNum={0}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    href="https://github.com/harikiran138"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                  </TimelineContent>
+                  <TimelineContent
+                    as="a"
+                    animationNum={1}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    href="https://linkedin.com/in/chepuri-hari-kiran"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </TimelineContent>
+                  <TimelineContent
+                    as="a"
+                    animationNum={2}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    href="mailto:harikiranc138@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                  </TimelineContent>
+                </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                {/* Left Side: Leading Statement */}
-                <motion.div 
-                  variants={fadeIn}
-                  className="space-y-6"
-                >
-                  <h3 className="text-2xl md:text-3xl font-medium leading-tight text-foreground/90">
-                    A full-stack developer <br />
-                    <span className="text-primary">building resilient AI solutions</span>
-                  </h3>
-                  <div className="w-20 h-1 bg-primary/20 rounded-full" />
-                </motion.div>
+              <TimelineContent
+                as="figure"
+                animationNum={4}
+                timelineRef={aboutRef}
+                customVariants={{
+                   visible: (i: number) => ({
+                      opacity: 1,
+                      filter: "blur(0px)",
+                      scale: 1,
+                      transition: { delay: i * 0.4, duration: 0.5 },
+                    }),
+                    hidden: { filter: "blur(10px)", opacity: 0, scale: 0.95 },
+                }}
+                className="relative group mt-16 md:mt-0"
+              >
+                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl">
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+                   <Image
+                    src="/Users/chepuriharikiran/.gemini/antigravity/brain/79ff0764-7f19-45fe-bf50-b9f833df4b88/about_me_bg_accent_1766541031573.png"
+                    alt="About Me Banner"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                   />
+                </div>
+              </TimelineContent>
 
-                {/* Right Side: Detailed Narrative */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={stagger}
-                  className="space-y-10"
+              {/* Stats - Adapted for a Developer */}
+              <div className="flex flex-wrap lg:justify-start justify-between items-center py-6 text-sm relative z-20">
+                <TimelineContent
+                  as="div"
+                  animationNum={5}
+                  timelineRef={aboutRef}
+                  customVariants={revealVariants}
+                  className="flex gap-4"
                 >
-                  <div className="space-y-8">
-                    <TextGenerateEffect 
-                      words="I’m a full-stack and AI-focused developer passionate about building intelligent systems that solve real-world problems. Working across web, AI, and cloud technologies, I turn ideas into scalable, reliable products—from smart classroom platforms like ClassNova to AI-powered academic and automation systems."
-                      className="text-justify font-normal text-lg leading-relaxed text-foreground/80"
-                    />
-                    
-                    <TextGenerateEffect 
-                      words="I enjoy breaking down complex challenges, designing clean architectures, and continuously improving systems as they evolve. Driven by impact and constant learning, my goal is simple: build technology people can actually use and grow with—systems that adapt, scale, and stay relevant."
-                      className="text-justify font-normal text-lg leading-relaxed text-muted-foreground"
-                    />
+                  <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
+                    <span className="text-primary font-bold">3+</span>
+                    <span className="text-muted-foreground">Years Experience</span>
+                    <span className="text-border">|</span>
                   </div>
-
-                  <motion.div variants={fadeIn} className="pt-4">
-                    <Button 
-                      size="lg" 
-                      onClick={() => scrollToSection("contact")}
-                      className="rounded-full px-12 h-14 text-base font-medium transition-all hover:translate-y-[-2px] hover:shadow-lg shadow-primary/10"
-                    >
-                      Get In Touch
-                      <div className="ml-2 w-2 h-2 rounded-full bg-white animate-pulse" />
-                    </Button>
-                  </motion.div>
-                </motion.div>
+                  <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
+                    <span className="text-primary font-bold">Full Stack</span>
+                    <span className="text-muted-foreground">Developer</span>
+                  </div>
+                </TimelineContent>
+                <div className="lg:absolute right-0 lg:-bottom-16 bottom-0 flex lg:flex-col flex-row-reverse lg:gap-0 gap-4">
+                  <TimelineContent
+                    as="div"
+                    animationNum={6}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="flex lg:text-4xl sm:text-3xl text-2xl items-center gap-2 mb-2"
+                  >
+                    <span className="text-primary font-semibold">20+</span>
+                    <span className="text-muted-foreground uppercase text-sm md:text-base">Projects</span>
+                  </TimelineContent>
+                   <TimelineContent
+                    as="div"
+                    animationNum={7}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="flex items-center gap-2 mb-2 sm:text-base text-xs"
+                  >
+                    <span className="text-primary font-bold">100%</span>
+                    <span className="text-muted-foreground">Commitment</span>
+                    <span className="text-border lg:hidden block">|</span>
+                  </TimelineContent>
+                </div>
               </div>
             </div>
+
+            {/* Main Content */}
+            <div className="grid md:grid-cols-3 gap-12 mt-12 mb-12">
+              <div className="md:col-span-2 space-y-8">
+                <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[120%] font-semibold text-foreground mb-4">
+                  <VerticalCutReveal
+                    splitBy="words"
+                    staggerDuration={0.1}
+                    staggerFrom="first"
+                    reverse={true}
+                    transition={{
+                      type: "spring",
+                      stiffness: 250,
+                      damping: 30,
+                      delay: 0.2,
+                    }}
+                  >
+                    Building Intelligent Systems that Scale.
+                  </VerticalCutReveal>
+                </h1>
+              </div>
+
+              <div className="md:col-span-1">
+                <div className="text-right flex flex-col items-end">
+                  <TimelineContent
+                    as="div"
+                    animationNum={12}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="text-primary text-2xl font-bold mb-2 uppercase tracking-wide"
+                  >
+                    HARI KIRAN
+                  </TimelineContent>
+                  <TimelineContent
+                    as="div"
+                    animationNum={13}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="text-muted-foreground text-sm mb-8"
+                  >
+                    Full Stack Developer | AI Enthusiast
+                  </TimelineContent>
+
+                  <TimelineContent
+                    as="div"
+                    animationNum={14}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    className="mb-8 max-w-[200px]"
+                  >
+                    <p className="text-foreground font-medium mb-4">
+                      Ready to build something amazing together?
+                    </p>
+                  </TimelineContent>
+
+                  <TimelineContent
+                    as="button"
+                    animationNum={15}
+                    timelineRef={aboutRef}
+                    customVariants={revealVariants}
+                    onClick={() => scrollToSection("contact")}
+                    className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 flex w-fit gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-primary-foreground px-6 py-3 rounded-xl cursor-pointer font-semibold items-center"
+                  >
+                    LET'S CONNECT <ArrowRight className="w-4 h-4" />
+                  </TimelineContent>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bio Text Moved to Bottom */}
+            <TimelineContent
+              as="div"
+              animationNum={16}
+              timelineRef={aboutRef}
+              customVariants={revealVariants}
+              className="w-full text-muted-foreground sm:text-lg text-base border-t border-border/50 pt-8 mt-4"
+            >
+              <p className="leading-relaxed text-justify">
+                I’m a full-stack and AI-focused developer passionate about building intelligent systems that solve real-world problems. Working across web, AI, and cloud technologies, I turn ideas into scalable, reliable products—from smart classroom platforms to AI-powered automation systems. I enjoy breaking down complex challenges, designing clean architectures, and continuously improving systems as they evolve. My goal is simple: build technology people can actually use and grow with—systems that adapt, scale, and stay relevant.
+              </p>
+            </TimelineContent>
           </div>
         </section>
 

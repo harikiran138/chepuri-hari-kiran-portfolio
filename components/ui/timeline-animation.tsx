@@ -4,8 +4,8 @@ import React from "react";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface TimelineContentProps {
-  as?: React.ElementType;
+interface TimelineContentProps<T extends React.ElementType> {
+  as?: T;
   animationNum: number;
   timelineRef: React.RefObject<HTMLElement | null>;
   customVariants?: Variants;
@@ -29,14 +29,16 @@ const defaultVariants: Variants = {
   },
 };
 
-export function TimelineContent({
-  as: Component = "div",
+export function TimelineContent<T extends React.ElementType = "div">({
+  as,
   animationNum,
   timelineRef,
   customVariants = defaultVariants,
   className,
   children,
-}: TimelineContentProps) {
+  ...props
+}: TimelineContentProps<T> & React.ComponentPropsWithoutRef<T>) {
+  const Component = as || "div";
   const MotionComponent = motion(Component as any);
   const isInView = useInView(timelineRef as React.RefObject<Element>, { once: true, margin: "-100px" });
 
@@ -47,6 +49,7 @@ export function TimelineContent({
       custom={animationNum}
       variants={customVariants}
       className={cn(className)}
+      {...props}
     >
       {children}
     </MotionComponent>
