@@ -371,98 +371,70 @@ export default function LandingPage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-32 relative overflow-hidden">
-          {/* Decorative Background Accents */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] -z-10" />
-          
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              
-              {/* Left Column: Stylized Title & Visual */}
-              <div className="lg:col-span-4 space-y-8">
-                <div className="relative inline-block">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="absolute -bottom-2 left-0 h-3 bg-primary/20 -z-10"
-                  />
-                  <motion.h2 
-                    variants={fadeIn} 
-                    className="text-5xl md:text-6xl font-bold tracking-tighter"
-                  >
-                    The Story <br />
-                    <span className="text-primary italic">So Far</span>
-                  </motion.h2>
-                </div>
-
-                <motion.div 
-                  variants={fadeIn}
-                  className="relative group hidden lg:block"
+        <section id="about" className="py-32 relative">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              {/* Professional Header */}
+              <div className="flex items-center gap-6 mb-16">
+                <motion.h2 
+                  variants={fadeIn} 
+                  className="text-4xl md:text-5xl font-bold tracking-tight text-foreground"
                 >
-                  <div className="absolute inset-0 bg-primary/20 rounded-3xl blur-2xl group-hover:bg-primary/30 transition-all duration-500 -z-10" />
-                  <Image 
-                    src="/Users/chepuriharikiran/.gemini/antigravity/brain/79ff0764-7f19-45fe-bf50-b9f833df4b88/about_me_bg_accent_1766541031573.png"
-                    alt="Abstract Tech Accent"
-                    width={400}
-                    height={400}
-                    className="rounded-3xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-105 group-hover:rotate-2 opacity-60 mix-blend-lighten"
-                  />
-                </motion.div>
+                  About Me
+                </motion.h2>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "100px" }}
+                  transition={{ duration: 0.8 }}
+                  className="h-[1px] bg-primary/30 hidden md:block"
+                />
               </div>
 
-              {/* Right Column: Content & CTA */}
-              <div className="lg:col-span-8 space-y-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                {/* Left Side: Leading Statement */}
+                <motion.div 
+                  variants={fadeIn}
+                  className="space-y-6"
+                >
+                  <h3 className="text-2xl md:text-3xl font-medium leading-tight text-foreground/90">
+                    A full-stack developer <br />
+                    <span className="text-primary">building resilient AI solutions</span>
+                  </h3>
+                  <div className="w-20 h-1 bg-primary/20 rounded-full" />
+                </motion.div>
+
+                {/* Right Side: Detailed Narrative */}
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true }}
                   variants={stagger}
-                  className="space-y-12"
+                  className="space-y-10"
                 >
-                  <div className="space-y-8 relative">
-                    {/* Floating Quote-like indicator */}
-                    <div className="absolute -left-8 top-0 text-7xl font-serif text-primary/10 select-none">“</div>
+                  <div className="space-y-8">
+                    <TextGenerateEffect 
+                      words="I’m a full-stack and AI-focused developer passionate about building intelligent systems that solve real-world problems. Working across web, AI, and cloud technologies, I turn ideas into scalable, reliable products—from smart classroom platforms like ClassNova to AI-powered academic and automation systems."
+                      className="text-justify font-normal text-lg leading-relaxed text-foreground/80"
+                    />
                     
-                    <div className="space-y-6">
-                      <div className="relative">
-                        <TextGenerateEffect 
-                          words="I’m a full-stack and AI-focused developer passionate about building intelligent systems that solve real-world problems. Working across web, AI, and cloud technologies, I turn ideas into scalable, reliable products—from smart classroom platforms like ClassNova to AI-powered academic and automation systems."
-                          className="text-justify font-medium text-lg md:text-2xl leading-relaxed"
-                        />
-                      </div>
-                      
-                      <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <TextGenerateEffect 
-                          words="I enjoy breaking down complex challenges, designing clean architectures, and continuously improving systems as they evolve. Driven by impact and constant learning, my goal is simple: build technology people can actually use and grow with—systems that adapt, scale, and stay relevant."
-                          className="text-justify font-normal text-muted-foreground italic leading-relaxed"
-                        />
-                      </div>
-                    </div>
+                    <TextGenerateEffect 
+                      words="I enjoy breaking down complex challenges, designing clean architectures, and continuously improving systems as they evolve. Driven by impact and constant learning, my goal is simple: build technology people can actually use and grow with—systems that adapt, scale, and stay relevant."
+                      className="text-justify font-normal text-lg leading-relaxed text-muted-foreground"
+                    />
                   </div>
 
-                  <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center gap-6 pt-4">
+                  <motion.div variants={fadeIn} className="pt-4">
                     <Button 
                       size="lg" 
                       onClick={() => scrollToSection("contact")}
-                      className="rounded-full px-12 h-16 text-lg font-semibold shadow-2xl shadow-primary/20 transition-all hover:scale-110 active:scale-95 gap-3 group bg-primary hover:bg-primary/90"
+                      className="rounded-full px-12 h-14 text-base font-medium transition-all hover:translate-y-[-2px] hover:shadow-lg shadow-primary/10"
                     >
-                      <Brain className="w-6 h-6 group-hover:animate-pulse" />
                       Get In Touch
+                      <div className="ml-2 w-2 h-2 rounded-full bg-white animate-pulse" />
                     </Button>
-                    
-                    <div className="flex gap-4">
-                      <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-8 h-[1px] bg-muted-foreground/30" />
-                        Available for Projects
-                      </p>
-                    </div>
                   </motion.div>
                 </motion.div>
               </div>
-
             </div>
           </div>
         </section>
