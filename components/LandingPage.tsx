@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import About from "@/components/About";
+import WebGPUScene from "@/components/WebGPUScene";
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import { SkillCard } from "@/components/ui/skill-card";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -307,66 +309,78 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center pt-20">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl space-y-8 text-left">
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={staggerContainer}
-                className="space-y-6"
-              >
-                
-                <motion.h1
-                  variants={fadeIn}
-                  className="text-5xl md:text-7xl font-bold tracking-tight leading-tight"
-                >
-                  I Build Intelligent Systems for a Changing
-                  <span className="relative flex w-full overflow-hidden text-left h-[1.2em] md:h-[1.1em] text-primary">
-                    {titles.map((title: string, index: number) => (
-                      <motion.span
-                        key={index}
-                        className="absolute font-semibold"
-                        initial={{ opacity: 0, y: "100%" }}
-                        transition={{ type: "spring", stiffness: 50 }}
-                        animate={
-                          titleNumber === index
-                            ? {
-                                y: 0,
-                                opacity: 1,
-                              }
-                            : {
-                                y: titleNumber > index ? "-100%" : "100%",
-                                opacity: 0,
-                              }
-                        }
-                      >
-                        {title}
-                      </motion.span>
-                    ))}
-                  </span>
-                </motion.h1>
-
-                <motion.p
-                   variants={fadeIn}
-                   className="text-xl text-muted-foreground max-w-2xl"
-                >
-                  Hi, I'm Chepuri Hari Kiran. I craft scalable web applications and 
-                  intuitive user interfaces using modern technologies.
-                </motion.p>
-
+            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)]">
+              {/* Left Column: Text Content */}
+              <div className="max-w-4xl space-y-8 text-left z-20 relative">
                 <motion.div
-                  variants={fadeIn}
-                  className="flex items-center gap-4 pt-4"
+                  initial="hidden"
+                  animate="visible"
+                  variants={staggerContainer}
+                  className="space-y-6"
                 >
-                  <Button size="lg" onClick={() => scrollToSection("projects")} className="gap-2">
-                    View Work <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="lg" asChild className="gap-2">
-                    <a href="https://github.com/harikiran138" target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4" /> GitHub
-                    </a>
-                  </Button>
+                  <motion.h1
+                    variants={fadeIn}
+                    className="text-5xl md:text-7xl font-bold tracking-tight leading-tight"
+                  >
+                    I Build Intelligent Systems for a Changing
+                    <span className="relative flex w-full overflow-hidden text-left h-[1.2em] md:h-[1.1em] text-primary">
+                      {titles.map((title: string, index: number) => (
+                        <motion.span
+                          key={index}
+                          className="absolute font-semibold"
+                          initial={{ opacity: 0, y: "100%" }}
+                          transition={{ type: "spring", stiffness: 50 }}
+                          animate={
+                            titleNumber === index
+                              ? {
+                                  y: 0,
+                                  opacity: 1,
+                                }
+                              : {
+                                  y: titleNumber > index ? "-100%" : "100%",
+                                  opacity: 0,
+                                }
+                          }
+                        >
+                          {title}
+                        </motion.span>
+                      ))}
+                    </span>
+                  </motion.h1>
+
+                  <motion.p
+                     variants={fadeIn}
+                     className="text-xl text-muted-foreground max-w-2xl"
+                  >
+                    I craft scalable web applications and 
+                    intuitive user interfaces using modern technologies.
+                  </motion.p>
+
+                  <motion.div
+                    variants={fadeIn}
+                    className="flex items-center gap-4 pt-4"
+                  >
+                    <Button size="lg" onClick={() => scrollToSection("contact")} className="gap-2">
+                      View Work <ArrowRight className="h-4 w-4" />
+                    </Button>
+                    <Button variant="outline" size="lg" asChild className="gap-2">
+                      <a href="https://github.com/harikiran138" target="_blank" rel="noopener noreferrer">
+                        <Github className="h-4 w-4" /> GitHub
+                      </a>
+                    </Button>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </div>
+
+               {/* Right Column: 3D Robot Animation */}
+                <div className="hidden lg:block h-[600px] w-full relative z-10 translate-x-12">
+                 <div className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full z-0" />
+                 
+                 <WebGPUScene />
+                </div>
+
+
+
             </div>
           </div>
           
@@ -382,194 +396,9 @@ export default function LandingPage() {
         </section>
 
         {/* About Section - Redesigned with Timeline & Reveal */}
-        <section id="about" className="py-24 px-4" ref={aboutRef}>
-          <div className="max-w-6xl mx-auto">
-            <div className="relative">
-              {/* Header with social icons */}
-              <div className="flex justify-between items-center mb-8 w-[95%] md:w-[85%] absolute lg:top-4 md:top-0 sm:-top-2 -top-12 z-10 left-0 right-0 mx-auto md:mx-0">
-                <div className="flex items-center gap-2 text-xl">
-                  <span className="text-primary">✱</span>
-                  <TimelineContent
-                    as="span"
-                    animationNum={0}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="text-sm font-medium text-muted-foreground"
-                  >
-                    WHO I AM
-                  </TimelineContent>
-                </div>
-                <div className="flex gap-4">
-                  <TimelineContent
-                    as="a"
-                    animationNum={0}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    href="https://github.com/harikiran138"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                  </TimelineContent>
-                  <TimelineContent
-                    as="a"
-                    animationNum={1}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    href="https://linkedin.com/in/chepuri-hari-kiran"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </TimelineContent>
-                  <TimelineContent
-                    as="a"
-                    animationNum={2}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    href="mailto:harikiranc138@gmail.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="md:w-8 md:h-8 sm:w-6 w-8 sm:h-6 h-8 border border-border bg-card rounded-lg flex items-center justify-center cursor-pointer hover:bg-muted transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                  </TimelineContent>
-                </div>
-              </div>
-
-              <TimelineContent
-                as="figure"
-                animationNum={4}
-                timelineRef={aboutRef}
-                customVariants={scaleVariants}
-                className="relative group mt-16 md:mt-0"
-              >
-                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl">
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                   <Image
-                    src="https://placehold.co/800x400/png"
-                    alt="About Me Banner"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                   />
-                </div>
-              </TimelineContent>
-
-              {/* Stats - Adapted for a Developer */}
-              <div className="flex flex-wrap lg:justify-start justify-between items-center py-6 text-sm relative z-20">
-                <TimelineContent
-                  as="div"
-                  animationNum={5}
-                  timelineRef={aboutRef}
-                  customVariants={revealVariants}
-                  className="flex gap-4"
-                >
-                  <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                    <span className="text-primary font-bold">3+</span>
-                    <span className="text-muted-foreground">Years Experience</span>
-                    <span className="text-border">|</span>
-                  </div>
-                  <div className="flex items-center gap-2 mb-2 sm:text-base text-xs">
-                    <span className="text-primary font-bold">Full Stack</span>
-                    <span className="text-muted-foreground">Developer</span>
-                  </div>
-                </TimelineContent>
-                <div className="lg:absolute right-0 lg:-bottom-16 bottom-0 flex lg:flex-col flex-row-reverse lg:gap-0 gap-4">
-                  <TimelineContent
-                    as="div"
-                    animationNum={6}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="flex lg:text-4xl sm:text-3xl text-2xl items-center gap-2 mb-2"
-                  >
-                    <span className="text-primary font-semibold">20+</span>
-                    <span className="text-muted-foreground uppercase text-sm md:text-base">Projects</span>
-                  </TimelineContent>
-                   <TimelineContent
-                    as="div"
-                    animationNum={7}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="flex items-center gap-2 mb-2 sm:text-base text-xs"
-                  >
-                    <span className="text-primary font-bold">100%</span>
-                    <span className="text-muted-foreground">Commitment</span>
-                    <span className="text-border lg:hidden block">|</span>
-                  </TimelineContent>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="grid md:grid-cols-3 gap-12 mt-12 mb-12">
-              <div className="md:col-span-2 space-y-8">
-                <h1 className="sm:text-4xl md:text-5xl text-2xl !leading-[120%] font-semibold text-foreground mb-4">
-                  Building Intelligent Systems that Scale.
-                </h1>
-              </div>
-
-              <div className="md:col-span-1">
-                <div className="text-right flex flex-col items-end">
-                  <TimelineContent
-                    as="div"
-                    animationNum={12}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="text-primary text-2xl font-bold mb-2 uppercase tracking-wide"
-                  >
-                    HARI KIRAN
-                  </TimelineContent>
-                  <TimelineContent
-                    as="div"
-                    animationNum={13}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="text-muted-foreground text-sm mb-8"
-                  >
-                    Full Stack Developer | AI Enthusiast
-                  </TimelineContent>
-
-                  <TimelineContent
-                    as="div"
-                    animationNum={14}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    className="mb-8 max-w-[200px]"
-                  >
-                    <p className="text-foreground font-medium mb-4">
-                      Ready to build something amazing together?
-                    </p>
-                  </TimelineContent>
-
-                  <TimelineContent
-                    as="button"
-                    animationNum={15}
-                    timelineRef={aboutRef}
-                    customVariants={revealVariants}
-                    onClick={() => scrollToSection("contact")}
-                    className="bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 flex w-fit gap-2 hover:gap-4 transition-all duration-300 ease-in-out text-primary-foreground px-6 py-3 rounded-xl cursor-pointer font-semibold items-center"
-                  >
-                    LET'S CONNECT <ArrowRight className="w-4 h-4" />
-                  </TimelineContent>
-                </div>
-              </div>
-            </div>
-            
-            {/* Bio Text Moved to Bottom */}
-            <TimelineContent
-              as="div"
-              animationNum={16}
-              timelineRef={aboutRef}
-              customVariants={revealVariants}
-              className="w-full text-muted-foreground sm:text-lg text-base border-t border-border/50 pt-8 mt-4"
-            >
-              <p className="leading-relaxed text-justify">
-                I’m a full-stack and AI-focused developer passionate about building intelligent systems that solve real-world problems. Working across web, AI, and cloud technologies, I turn ideas into scalable, reliable products—from smart classroom platforms to AI-powered automation systems. I enjoy breaking down complex challenges, designing clean architectures, and continuously improving systems as they evolve. My goal is simple: build technology people can actually use and grow with—systems that adapt, scale, and stay relevant.
-              </p>
-            </TimelineContent>
-          </div>
+        {/* About Section - Redesigned with Timeline & Reveal */}
+        <section id="about" ref={aboutRef}>
+            <About />
         </section>
 
         <section id="skills" className="py-24">
@@ -590,11 +419,11 @@ export default function LandingPage() {
                 </motion.p>
               </div>
               
-              <div className="relative mt-8">
-                {/* Horizontal Marquee Container */}
-                <div className="flex overflow-hidden py-10">
+              <div className="relative mt-8 space-y-4">
+                {/* Horizontal Marquee Container - Row 1 (Left) */}
+                <div className="flex overflow-hidden py-2 mask-linear">
                   <motion.div
-                    className="flex gap-6 whitespace-nowrap"
+                    className="flex gap-3 whitespace-nowrap"
                     animate={{
                       x: [0, "-50%"],
                     }}
@@ -602,34 +431,53 @@ export default function LandingPage() {
                       x: {
                         repeat: Infinity,
                         repeatType: "loop",
-                        duration: 50, // Slower glide for better readability
+                        duration: 60,
                         ease: "linear",
                       },
                     }}
                     style={{ display: "flex", width: "fit-content" }}
                   >
-                    {/* First set of skills */}
-                    {skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).map((skill, i) => (
+                    {[...skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).slice(0, 15), ...skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).slice(0, 15)].map((skill, i) => (
                       <SkillCard
-                        key={`skill-1-${i}`}
+                        key={`skill-row1-${i}`}
                         icon={skill.icon}
                         title={skill.cat}
                         description={skill.name}
-                        className="min-w-[240px] shadow-lg"
-                      />
-                    ))}
-                    {/* Duplicate set for seamless loop */}
-                    {skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).map((skill, i) => (
-                      <SkillCard
-                        key={`skill-2-${i}`}
-                        icon={skill.icon}
-                        title={skill.cat}
-                        description={skill.name}
-                        className="min-w-[240px] shadow-lg"
+                        className="min-w-[200px] shadow-sm border-white/5 bg-white/5 backdrop-blur-md"
                       />
                     ))}
                   </motion.div>
                 </div>
+
+                {/* Horizontal Marquee Container - Row 2 (Right) */}
+                <div className="flex overflow-hidden py-2 mask-linear">
+                  <motion.div
+                    className="flex gap-3 whitespace-nowrap"
+                    animate={{
+                      x: ["-50%", 0],
+                    }}
+                    transition={{
+                      x: {
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        duration: 60,
+                        ease: "linear",
+                      },
+                    }}
+                    style={{ display: "flex", width: "fit-content" }}
+                  >
+                    {[...skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).slice(15), ...skillCategories.flatMap(cat => cat.skills.map(s => ({ ...s, cat: cat.title }))).slice(15)].map((skill, i) => (
+                      <SkillCard
+                        key={`skill-row2-${i}`}
+                        icon={skill.icon}
+                        title={skill.cat}
+                        description={skill.name}
+                        className="min-w-[200px] shadow-sm border-white/5 bg-white/5 backdrop-blur-md"
+                      />
+                    ))}
+                  </motion.div>
+                </div>
+
                 
                 {/* Gradient Masks for fade effect */}
                 <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />

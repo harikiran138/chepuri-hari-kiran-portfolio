@@ -85,3 +85,32 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.5s forwards ease-out;
+  }
+  
+  .fade-in-subtitle {
+    animation: fadeIn 0.8s forwards ease-out;
+  }
+  
+  .explore-btn {
+    @apply absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white/80 text-sm uppercase tracking-wider transition-all duration-300 hover:text-white;
+    animation: fadeIn 0.5s forwards ease-out;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}

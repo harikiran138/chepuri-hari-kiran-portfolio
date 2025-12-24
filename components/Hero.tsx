@@ -1,4 +1,4 @@
-import SplineScene from "./SplineScene";
+
 
 export default function Hero() {
   return (
@@ -18,9 +18,9 @@ export default function Hero() {
         left: 0, 
         width: '100%', 
         height: '100%', 
-        zIndex: 0 
+        zIndex: 0,
+        background: 'linear-gradient(to bottom, #000000, #1a1a1a)' // Fallback background
       }}>
-        <SplineScene scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" className="w-full h-full" />
       </div>
 
       {/* Content Overlay */}
@@ -31,16 +31,7 @@ export default function Hero() {
         pointerEvents: 'none' // Let clicks pass through to Spline if needed, but buttons need pointer-events-auto
       }}>
         <div className="fade-in-up" style={{ pointerEvents: 'auto' }}>
-          <p style={{ fontSize: '1.2rem', color: 'var(--secondary-color)', marginBottom: '1rem' }}>
-            Hello, I&apos;m
-          </p>
-          <h1 style={{ 
-            fontSize: '4rem', 
-            marginBottom: '1rem',
-            background: 'var(--gradient-1)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>Chepuri Hari Kiran</h1>
+
           <p style={{ fontSize: '1.8rem', color: 'var(--text-color)', marginBottom: '2rem', fontWeight: '300' }}>
             Web Developer & Creative Technologist
           </p>
