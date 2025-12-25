@@ -39,7 +39,7 @@ export function TimelineContent<T extends React.ElementType = "div">({
   ...props
 }: TimelineContentProps<T> & React.ComponentPropsWithoutRef<T>) {
   const Component = as || "div";
-  const MotionComponent = motion(Component as any);
+  const MotionComponent = React.useMemo(() => motion(Component as any), [Component]);
   const isInView = useInView(timelineRef as React.RefObject<Element>, { once: true, margin: "-100px" });
 
   return (

@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String            @id @default(uuid())
+  name          String?
+  email         String            @unique
+  password      String?           // Hashed password
+  role          String            @default("EMPLOYER") // ADMIN, EMPLOYER
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  requests      EmployerRequest[]
+}
+
+model EmployerRequest {
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
+  companyName    String
+  companyWebsite String?
+  roleType       String        // JOB, INTERNSHIP, FREELANCE, COLLABORATION
+  message        String
+  budgetRange    String?
+  status         String        @default("PENDING") // PENDING, ACCEPTED, REJECTED, CONTACTED
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}

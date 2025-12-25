@@ -1,0 +1,158 @@
+
+> temp-next@0.1.0 lint
+> eslint
+
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/About.tsx
+  38:53  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/Certifications.tsx
+  4:22  warning  'ExternalLink' is defined but never used  @typescript-eslint/no-unused-vars
+  5:10  warning  'Button' is defined but never used        @typescript-eslint/no-unused-vars
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/LandingPage.tsx
+    3:40  warning  'useRef' is defined but never used                               @typescript-eslint/no-unused-vars
+   82:25  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  343:18  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  344:20  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/NeonOrbs.tsx
+  9:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/NeonOrbs.tsx:9:5
+   7 |
+   8 |   useEffect(() => {
+>  9 |     setMounted(true)
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  10 |   }, [])
+  11 |
+  12 |   return (  react-hooks/set-state-in-effect
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/WebGPUScene.tsx
+   31:17  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+   47:59  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+   54:5   error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/WebGPUScene.tsx:54:5
+  52 |     // Create the scanning effect uniform
+  53 |     const uScanProgress = uniform(0);
+> 54 |     progressRef.current = uScanProgress;
+     |     ^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  55 |
+  56 |     // Create a red overlay that follows the scan line
+  57 |     const scanPos = float(uScanProgress.value);                                                                                                                                                                                                                                                                                                                                                                         react-hooks/refs
+  153:5   error    Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/WebGPUScene.tsx:153:5
+  151 |
+  152 |   useFrame(({ clock }) => {
+> 153 |     uniforms.uProgress.value = (Math.sin(clock.getElapsedTime() * 0.5) * 0.5 + 0.5);
+      |     ^^^^^^^^^^^^^^^^^^ `uniforms` cannot be modified
+  154 |     // Плавное появление
+  155 |     if (meshRef.current && 'material' in meshRef.current && meshRef.current.material) {
+  156 |       const mat = meshRef.current.material as any;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/immutability
+  156:47  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+  168:5   error    Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/WebGPUScene.tsx:168:5
+  166 |
+  167 |   useFrame(({ pointer }) => {
+> 168 |     uniforms.uPointer.value = pointer;
+      |     ^^^^^^^^^^^^^^^^^ `uniforms` cannot be modified
+  169 |   });
+  170 |
+  171 |   const scaleFactor = 0.40;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/immutability
+  189:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/WebGPUScene.tsx:189:5
+  187 |   useEffect(() => {
+  188 |     // Только на клиенте: генерируем случайные задержки для глитча
+> 189 |     setDelays(titleWords.map(() => Math.random() * 0.07));
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  190 |     setSubtitleDelay(Math.random() * 0.1);
+  191 |   }, [titleWords.length]);
+  192 |  react-hooks/set-state-in-effect
+  191:6   warning  React Hook useEffect has a missing dependency: 'titleWords'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/exhaustive-deps
+  232:62  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-explicit-any
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/input.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/morphing-text.tsx
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/text-generate-effect.tsx
+  18:7  error    'wordsArray' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             prefer-const
+  31:6  warning  React Hook useEffect has missing dependencies: 'animate', 'duration', and 'filter'. Either include them or remove the dependency array. Mutable values like 'scope.current' aren't valid dependencies because mutating them doesn't re-render the component                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+  31:7  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/text-generate-effect.tsx:31:7
+  29 |       }
+  30 |     );
+> 31 |   }, [scope.current]);
+     |       ^^^^^^^^^^^^^ Cannot access ref value during render
+  32 |
+  33 |   const renderWords = () => {
+  34 |     return (  react-hooks/refs
+  31:7  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/text-generate-effect.tsx:31:7
+  29 |       }
+  30 |     );
+> 31 |   }, [scope.current]);
+     |       ^^^^^^^^^^^^^ Cannot access ref value during render
+  32 |
+  33 |   const renderWords = () => {
+  34 |     return (  react-hooks/refs
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/textarea.tsx
+  5:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/timeline-animation.tsx
+  47:6  error  Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/timeline-animation.tsx:47:6
+  45 |
+  46 |   return (
+> 47 |     <MotionComponent
+     |      ^^^^^^^^^^^^^^^ This component is created during render
+  48 |       initial="hidden"
+  49 |       animate={isInView ? "visible" : "hidden"}
+  50 |       custom={animationNum}
+
+/Users/chepuriharikiran/Desktop/github/chepuri-hari-kiran-portfolio/components/ui/timeline-animation.tsx:43:27
+  41 |   const Component = as || "div";
+  42 |   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+> 43 |   const MotionComponent = motion(Component as any);
+     |                           ^^^^^^^^^^^^^^^^^^^^^^^^ The component is created during render here
+  44 |   const isInView = useInView(timelineRef as React.RefObject<Element>, { once: true, margin: "-100px" });
+  45 |
+  46 |   return (  react-hooks/static-components
+
+✖ 25 problems (20 errors, 5 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

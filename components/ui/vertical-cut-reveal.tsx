@@ -1,22 +1,17 @@
 "use client";
+
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 
 interface VerticalCutRevealProps {
   children: React.ReactNode;
-  splitBy?: "words" | "characters" | "lines";
   staggerDuration?: number;
-  staggerFrom?: "first" | "last" | "center" | number;
-  reverse?: boolean;
-  transition?: any;
+  transition?: Transition;
 }
 
 export const VerticalCutReveal = ({ 
   children, 
-  splitBy = "words", 
   staggerDuration = 0.1, 
-  staggerFrom = "first", 
-  reverse = false, 
   transition = { type: "spring", stiffness: 200, damping: 20 }
 }: VerticalCutRevealProps) => {
   const text = typeof children === "string" ? children : "";
