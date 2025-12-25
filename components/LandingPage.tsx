@@ -101,20 +101,19 @@ export default function LandingPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center pt-20">
+        <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] text-center">
-              <div className="max-w-4xl space-y-8 z-20 relative">
-                <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-6">
-                  {/* System Online Removed */}
-                  
+            <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)]">
+              {/* Left Column: Text */}
+              <div className="flex flex-col items-start justify-center text-left order-2 md:order-1 z-20 relative">
+                <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-6 w-full">
                   <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
                     Building AI-powered <br />
-                    <span className="relative flex justify-center w-full overflow-hidden h-[1.2em] md:h-[1.1em] text-primary">
+                    <span className="relative flex w-full overflow-hidden h-[1.2em] md:h-[1.1em] text-primary">
                       {titles.map((title, index) => (
                         <motion.span
                           key={index}
-                          className="absolute"
+                          className="absolute left-0"
                           initial={{ opacity: 0, y: "100%" }}
                           animate={titleNumber === index ? { y: 0, opacity: 1 } : { y: titleNumber > index ? "-100%" : "100%", opacity: 0 }}
                           transition={{ type: "spring", stiffness: 50 }}
@@ -126,11 +125,11 @@ export default function LandingPage() {
                     that scale beyond demos.
                   </motion.h1>
 
-                  <motion.p variants={fadeIn} className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  <motion.p variants={fadeIn} className="text-xl text-muted-foreground mr-auto leading-relaxed max-w-lg">
                     Full-stack & AI developer crafting real-world products, smart platforms, and intelligent systems.
                   </motion.p>
 
-                  <motion.div variants={fadeIn} className="flex items-center justify-center gap-4 pt-4">
+                  <motion.div variants={fadeIn} className="flex flex-wrap gap-4 pt-4">
                     <Button size="lg" onClick={() => scrollToSection("projects")} className="gap-2 px-8">
                       View Projects <ArrowRight className="h-4 w-4" />
                     </Button>
@@ -142,10 +141,29 @@ export default function LandingPage() {
                   </motion.div>
                 </motion.div>
               </div>
+
+              {/* Right Column: Image */}
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="flex items-center justify-center order-1 md:order-2 relative z-10"
+              >
+                 <div className="relative w-full max-w-[500px] aspect-square">
+                    {/* Blob Background Effect behind image usually looks good, keeping it subtle or removing if requested purely transparent. 
+                        The user asked for "transparent background image", implying the image itself has transparency. 
+                        We will just place the image. */}
+                    <img 
+                      src="/hero-avatar.svg" 
+                      alt="Chepuri Hari Kiran" 
+                      className="w-full h-full object-contain drop-shadow-2xl" 
+                    />
+                 </div>
+              </motion.div>
             </div>
           </div>
           
-          <motion.div style={{ opacity }} className="absolute bottom-10 left-1/2 -translate-x-1/2">
+          <motion.div style={{ opacity }} className="absolute bottom-10 left-1/2 -translate-x-1/2  z-30">
             <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full p-1">
               <div className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce mx-auto" />
             </div>
