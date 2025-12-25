@@ -9,6 +9,7 @@ import {
 
 const { auth } = NextAuth(authConfig)
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default auth((req: any) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth

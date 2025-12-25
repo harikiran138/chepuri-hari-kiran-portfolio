@@ -17,27 +17,111 @@ const certifications = [
     link: "https://cs50.harvard.edu/certificates/369082c8-2613-460c-9444-ab452734ea00"
   },
   {
+    name: "CS50's Intro to Programming with Python",
+    issuer: "Harvard University (CS50)",
+    date: "May 2024",
+    link: "#"
+  },
+  {
     name: "Certified Ethical Hacker (CEH)",
     issuer: "Infosys Springboard",
     date: "Mar 2024",
     link: "https://verify.onwingspan.com/"
   },
   {
-    name: "Intro to Generative AI & LLMs",
+    name: "Intro to Generative AI",
     issuer: "Google Cloud",
     date: "Mar 2024",
     link: "https://www.cloudskillsboost.google/public_profiles/8267dbad-4cda-4a76-8628-76365ce14cd0/badges/8478874"
   },
   {
+    name: "Intro to Large Language Models",
+    issuer: "Google Cloud",
+    date: "Mar 2024",
+    link: "https://www.cloudskillsboost.google/public_profiles/8267dbad-4cda-4a76-8628-76365ce14cd0/badges/8479289"
+  },
+  {
     name: "Web Development Bootcamp 2024",
-    issuer: "Udemy",
+    issuer: "Udemy (Dr. Angela Yu)",
     date: "Mar 2024",
     link: "https://www.udemy.com/certificate/UC-5b04883f-0d98-4ac9-9765-49a62ad8ad50"
   },
   {
-    name: "AWS Cloud & DevOps Foundation",
-    issuer: "Simplilearn / AWS",
+    name: "Full Stack Development: Introduction",
+    issuer: "Skillsoft",
     date: "Feb 2024",
+    link: "https://www.skillsoft.com"
+  },
+  {
+    name: "Full Stack Software Developer Assessment",
+    issuer: "IBM",
+    date: "Feb 2024",
+    link: "#"
+  },
+  {
+    name: "Getting Started with AWS",
+    issuer: "Simplilearn",
+    date: "Feb 2024",
+    link: "#"
+  },
+  {
+    name: "Python for Beginners",
+    issuer: "Infosys Springboard",
+    date: "Feb 2024",
+    link: "#"
+  },
+  {
+    name: "Introduction to Microsoft Excel",
+    issuer: "Coursera",
+    date: "Jan 2024",
+    link: "#"
+  },
+  {
+    name: "Google Ads for Beginners",
+    issuer: "Coursera",
+    date: "Jan 2024",
+    link: "#"
+  },
+  {
+    name: "Problem Solving (Intermediate)",
+    issuer: "HackerRank",
+    date: "Jan 2024",
+    link: "#"
+  },
+  {
+    name: "Python (Basic)",
+    issuer: "HackerRank",
+    date: "Dec 2023",
+    link: "#"
+  },
+  {
+    name: "Introduction to Programming Using Python",
+    issuer: "Sololearn",
+    date: "Dec 2023",
+    link: "#"
+  },
+  {
+    name: "Introduction to Cybersecurity",
+    issuer: "Cisco",
+    date: "Sep 2023",
+    link: "#"
+  },
+  {
+    name: "Network Support and Security",
+    issuer: "Cisco",
+    date: "Sep 2023",
+    link: "#"
+  },
+  {
+    name: "Networking Basics",
+    issuer: "Cisco",
+    date: "Sep 2023",
+    link: "#"
+  },
+  {
+    name: "Programming in C",
+    issuer: "CodeChef",
+    date: "Aug 2023",
     link: "#"
   }
 ];
