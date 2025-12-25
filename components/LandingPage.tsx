@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import About from "@/components/About";
-import WebGPUScene from "@/components/WebGPUScene";
+// import WebGPUScene from "@/components/WebGPUScene"; // Removed as per request
 import Achievements from "@/components/Achievements";
 import Experience from "@/components/Experience";
 import Certifications from "@/components/Certifications";
@@ -170,17 +170,14 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center pt-20">
           <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)]">
-              <div className="max-w-4xl space-y-8 text-left z-20 relative">
+            <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] text-center">
+              <div className="max-w-4xl space-y-8 z-20 relative">
                 <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-6">
-                  <motion.div variants={fadeIn} className="flex items-center gap-2 text-primary font-mono text-sm tracking-widest uppercase">
-                    <Terminal className="w-4 h-4" />
-                    <span>System Online</span>
-                  </motion.div>
+                  {/* System Online Removed */}
                   
                   <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
                     Building AI-powered <br />
-                    <span className="relative flex w-full overflow-hidden text-left h-[1.2em] md:h-[1.1em] text-primary">
+                    <span className="relative flex justify-center w-full overflow-hidden h-[1.2em] md:h-[1.1em] text-primary">
                       {titles.map((title, index) => (
                         <motion.span
                           key={index}
@@ -196,11 +193,11 @@ export default function LandingPage() {
                     that scale beyond demos.
                   </motion.h1>
 
-                  <motion.p variants={fadeIn} className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
+                  <motion.p variants={fadeIn} className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                     Full-stack & AI developer crafting real-world products, smart platforms, and intelligent systems.
                   </motion.p>
 
-                  <motion.div variants={fadeIn} className="flex items-center gap-4 pt-4">
+                  <motion.div variants={fadeIn} className="flex items-center justify-center gap-4 pt-4">
                     <Button size="lg" onClick={() => scrollToSection("projects")} className="gap-2 px-8">
                       View Projects <ArrowRight className="h-4 w-4" />
                     </Button>
@@ -211,12 +208,6 @@ export default function LandingPage() {
                     </Button>
                   </motion.div>
                 </motion.div>
-              </div>
-
-              {/* 3D Scene */}
-              <div className="hidden lg:block h-[600px] w-full relative z-10 translate-x-12">
-                 <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full z-0" />
-                 <WebGPUScene />
               </div>
             </div>
           </div>
