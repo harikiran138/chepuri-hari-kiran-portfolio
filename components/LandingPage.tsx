@@ -11,88 +11,17 @@ import Certifications from "@/components/Certifications";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
+
   Github,
   Mail,
   Linkedin,
-  Terminal,
-  Code2,
-  Database,
-  Cpu,
   Globe,
-  Server,
-  Layout,
-  Box,
-  BrainCircuit,
-  Cloud,
-  Zap
 } from "lucide-react";
 import { NeonOrbs } from "@/components/NeonOrbs";
+import { projects } from "@/data/projects";
+import { skills } from "@/data/skills";
 
-// Project Data - Updated from Master Prompt
-const projects = [
-  {
-    title: "Real-Time Sign Language Translator",
-    description: "An accessibility-focused AI system that translates sign language into text/speech in real-time using webcam input.",
-    tech: ["Python", "OpenCV", "MediaPipe", "RandomForest"],
-    impact: "Enables real-time communication for the hearing impaired.",
-    links: { demo: "#", code: "#" }
-  },
-  {
-    title: "EduFlex AI / Academic Platforms",
-    description: "Comprehensive academic platform with AI-driven analytics and assessments for personalized learning paths.",
-    tech: ["FastAPI", "Next.js", "PostgreSQL", "Docker"],
-    impact: "Scalable architecture handling complex student data analytics.",
-    links: { demo: "#", code: "#" }
-  },
-  {
-    title: "ClassNova (Smart Classroom System)",
-    description: "IoT enabled smart classroom system converting projectors into interactive digital whiteboards with cloud sync and AI assistance.",
-    tech: ["Hardware", "IoT", "Cloud Sync", "AI Assist"],
-    impact: "Modernizes traditional classrooms with affordable tech.",
-    links: { demo: "#", code: "#" }
-  },
-  {
-    title: "Job Recruitment Platform",
-    description: "Full-featured recruitment portal with authentication, resume parsing, and application tracking.",
-    tech: ["MERN Stack", "Auth", "Resume Upload", "Job Tracking"],
-    impact: "Streamlines the hiring process for recruiters and applicants.",
-    links: { demo: "#", code: "#" }
-  },
-  {
-    title: "Live Data Framework (Pathway)",
-    description: "Production-grade streaming ETL pipelines with integrated ML and LLM workflows.",
-    tech: ["Pathway", "Streaming ETL", "LLM", "Python"],
-    impact: "Real-time data processing for immediate insights.",
-    links: { demo: "#", code: "#" }
-  }
-];
 
-// Skills Data - Updated from Master Prompt
-const skills = [
-  { name: "Python", icon: <Terminal className="w-5 h-5" /> },
-  { name: "Java", icon: <Code2 className="w-5 h-5" /> },
-  { name: "C", icon: <Code2 className="w-5 h-5" /> },
-  { name: "JavaScript", icon: <Code2 className="w-5 h-5" /> },
-  { name: "React", icon: <Layout className="w-5 h-5" /> },
-  { name: "Next.js", icon: <Layout className="w-5 h-5" /> },
-  { name: "Tailwind", icon: <Layout className="w-5 h-5" /> },
-  { name: "FastAPI", icon: <Zap className="w-5 h-5" /> },
-  { name: "Node.js", icon: <Server className="w-5 h-5" /> },
-  { name: "Express", icon: <Server className="w-5 h-5" /> },
-  { name: "PostgreSQL", icon: <Database className="w-5 h-5" /> },
-  { name: "MongoDB", icon: <Database className="w-5 h-5" /> },
-  { name: "MySQL", icon: <Database className="w-5 h-5" /> },
-  { name: "AWS", icon: <Cloud className="w-5 h-5" /> },
-  { name: "Docker", icon: <Box className="w-5 h-5" /> },
-  { name: "MediaPipe", icon: <Cpu className="w-5 h-5" /> },
-  { name: "ML Models", icon: <BrainCircuit className="w-5 h-5" /> },
-  { name: "LLM APIs", icon: <BrainCircuit className="w-5 h-5" /> },
-  { name: "Git/GitHub", icon: <Github className="w-5 h-5" /> },
-  { name: "Linux", icon: <Terminal className="w-5 h-5" /> },
-  { name: "Ethical Hacking", icon: <Terminal className="w-5 h-5" /> },
-  { name: "Community Lead", icon: <Zap className="w-5 h-5" /> },
-  { name: "System Design", icon: <Cloud className="w-5 h-5" /> },
-];
 
 export default function LandingPage() {
   const [scrollY, setScrollY] = useState(0);
@@ -124,8 +53,12 @@ export default function LandingPage() {
   };
 
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: "easeOut" as const } 
+    },
   };
 
   const staggerContainer = {
@@ -237,6 +170,7 @@ export default function LandingPage() {
                   <motion.div
                     key={idx}
                     variants={fadeIn}
+                    whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
                     className="flex flex-col items-center justify-center p-6 bg-background/50 backdrop-blur-sm border border-border rounded-xl hover:border-primary/50 transition-colors group"
                   >
                     <div className="p-3 bg-secondary rounded-lg mb-3 text-primary group-hover:scale-110 transition-transform duration-300">
@@ -268,6 +202,7 @@ export default function LandingPage() {
                   <motion.div
                     key={idx}
                     variants={fadeIn}
+                    whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
                     className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300"
                   >
                     <div className="p-8 flex flex-col flex-grow">
