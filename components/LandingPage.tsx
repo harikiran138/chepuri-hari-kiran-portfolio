@@ -17,14 +17,16 @@ import {
   Linkedin,
   Globe,
 } from "lucide-react";
-import { NeonOrbs } from "@/components/NeonOrbs";
+import { InfiniteGrid } from "@/components/ui/infinite-grid";
+import { TechLogoCloud } from "@/components/ui/tech-logo-cloud";
+import ProjectScrollSection from "@/components/ProjectScrollSection";
 import { projects } from "@/data/projects";
 import { skills } from "@/data/skills";
 
 
 
 export default function LandingPage() {
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -42,10 +44,16 @@ export default function LandingPage() {
   }, [titleNumber, titles]);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 50;
+      if (scrolled !== isScrolled) {
+        setIsScrolled(scrolled);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Check initial state
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -68,14 +76,14 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen text-foreground selection:bg-primary/10 selection:text-primary relative font-sans">
-      <NeonOrbs />
+      <InfiniteGrid className="fixed inset-0 z-0" />
 
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrollY > 50 ? "bg-background/80 backdrop-blur-md border-b shadow-sm" : "bg-transparent"
+          isScrolled ? "bg-background/80 backdrop-blur-md border-b shadow-sm" : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
@@ -103,17 +111,17 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
           <div className="container mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-80px)]">
-              {/* Left Column: Text */}
-              <div className="flex flex-col items-start justify-center text-left order-2 md:order-1 z-20 relative">
-                <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-6 w-full">
+            <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] text-center">
+              {/* Content */}
+              <div className="flex flex-col items-center justify-center max-w-4xl mx-auto z-20 relative">
+                <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="space-y-8 w-full">
                   <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
                     Building AI-powered <br />
-                    <span className="relative flex w-full overflow-hidden h-[1.2em] md:h-[1.1em] text-primary">
+                    <span className="relative flex w-full justify-center overflow-hidden h-[1.2em] md:h-[1.1em] text-primary">
                       {titles.map((title, index) => (
                         <motion.span
                           key={index}
-                          className="absolute left-0"
+                          className="absolute"
                           initial={{ opacity: 0, y: "100%" }}
                           animate={titleNumber === index ? { y: 0, opacity: 1 } : { y: titleNumber > index ? "-100%" : "100%", opacity: 0 }}
                           transition={{ type: "spring", stiffness: 50 }}
@@ -125,15 +133,15 @@ export default function LandingPage() {
                     that scale beyond demos.
                   </motion.h1>
 
-                  <motion.p variants={fadeIn} className="text-xl text-muted-foreground mr-auto leading-relaxed max-w-lg">
+                  <motion.p variants={fadeIn} className="text-xl md:text-2xl text-muted-foreground mx-auto leading-relaxed max-w-2xl">
                     Full-stack & AI developer crafting real-world products, smart platforms, and intelligent systems.
                   </motion.p>
 
-                  <motion.div variants={fadeIn} className="flex flex-wrap gap-4 pt-4">
-                    <Button size="lg" onClick={() => scrollToSection("projects")} className="gap-2 px-8">
-                      View Projects <ArrowRight className="h-4 w-4" />
+                  <motion.div variants={fadeIn} className="flex flex-wrap justify-center gap-4 pt-8">
+                    <Button size="lg" onClick={() => scrollToSection("projects")} className="gap-2 px-8 h-12 text-lg">
+                      View Projects <ArrowRight className="h-5 w-5" />
                     </Button>
-                    <Button variant="outline" size="lg" asChild className="gap-2 px-8">
+                    <Button variant="outline" size="lg" asChild className="gap-2 px-8 h-12 text-lg">
                       <a href="/resume.pdf" download>
                         Download Resume
                       </a>
@@ -141,25 +149,6 @@ export default function LandingPage() {
                   </motion.div>
                 </motion.div>
               </div>
-
-              {/* Right Column: Image */}
-              <motion.div 
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="flex items-center justify-center order-1 md:order-2 relative z-10"
-              >
-                 <div className="relative w-full max-w-[500px] aspect-square">
-                    {/* Blob Background Effect behind image usually looks good, keeping it subtle or removing if requested purely transparent. 
-                        The user asked for "transparent background image", implying the image itself has transparency. 
-                        We will just place the image. */}
-                    <img 
-                      src="/hero-avatar.svg" 
-                      alt="Chepuri Hari Kiran" 
-                      className="w-full h-full object-contain drop-shadow-2xl" 
-                    />
-                 </div>
-              </motion.div>
             </div>
           </div>
           
@@ -174,8 +163,9 @@ export default function LandingPage() {
         <About />
 
         {/* Skills Grid */}
-        <section id="skills" className="py-24 bg-secondary/5">
-          <div className="container mx-auto px-6 max-w-6xl">
+        <section id="skills" className="py-24 relative overflow-hidden">
+             
+          <div className="container mx-auto px-6 max-w-6xl relative z-10">
              <motion.div
               initial="hidden"
               whileInView="visible"
@@ -183,81 +173,16 @@ export default function LandingPage() {
               variants={staggerContainer}
             >
               <h2 className="text-3xl font-bold mb-12 text-center">Tech Stack</h2>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {skills.map((skill, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={fadeIn}
-                    whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
-                    className="flex flex-col items-center justify-center p-6 bg-background/50 backdrop-blur-sm border border-border rounded-xl hover:border-primary/50 transition-colors group"
-                  >
-                    <div className="p-3 bg-secondary rounded-lg mb-3 text-primary group-hover:scale-110 transition-transform duration-300">
-                      {skill.icon}
-                    </div>
-                    <span className="font-medium text-sm text-center">{skill.name}</span>
-                  </motion.div>
-                ))}
+              <div className="w-full">
+                 <TechLogoCloud />
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-24">
-          <div className="container mx-auto px-6 max-w-7xl">
-            <motion.div
-               initial="hidden"
-               whileInView="visible"
-               viewport={{ once: true }}
-               variants={staggerContainer}
-             >
-              <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold mb-16 text-center">
-                Featured Projects
-              </motion.h2>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={fadeIn}
-                    whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
-                    className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300"
-                  >
-                    <div className="p-8 flex flex-col flex-grow">
-                      <div className="mb-4">
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                        <p className="text-muted-foreground text-sm line-clamp-3 leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
-                      
-                      <div className="mt-auto pt-6 space-y-6">
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((t) => (
-                            <span key={t} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-secondary rounded text-secondary-foreground font-semibold">
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                        
-                        <div className="flex items-center gap-4 pt-4 border-t border-border/50">
-                           <a href={project.links.code} className="text-sm font-medium flex items-center gap-2 hover:text-primary transition-colors">
-                             <Github className="w-4 h-4" /> Code
-                           </a>
-                           {project.links.demo !== "#" && (
-                              <a href={project.links.demo} className="text-sm font-medium flex items-center gap-2 hover:text-primary transition-colors">
-                                <Globe className="w-4 h-4" /> Live Demo
-                              </a>
-                           )}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        {/* Projects Section */}
+        <ProjectScrollSection />
 
         {/* Experience & Achievements */}
         <Experience />
@@ -308,7 +233,7 @@ export default function LandingPage() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 border-t bg-background/50 backdrop-blur-sm">
+        <footer className="py-8 border-t border-white/5">
           <div className="container mx-auto px-6 text-center">
             <p className="text-sm text-muted-foreground">
               Built with Next.js, Tailwind, and Framer Motion by <span className="text-foreground font-medium">Chepuri Hari Kiran</span>.

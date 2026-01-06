@@ -2,23 +2,24 @@
 
 import { motion } from "framer-motion";
 import { BadgeCheck } from "lucide-react";
+import { RatingInteraction } from "@/components/ui/rating-interaction";
 
 const certifications = [
   {
-    name: "5-Day AI Agents Intensive Course",
-    issuer: "Google / Kaggle",
+    name: "5-Day AI Agents Intensive Course with Google",
+    issuer: "Kaggle",
     date: "Dec 2025",
-    link: "https://www.kaggle.com/certification/badges/chepuriharikiran/105"
+    link: "#"
   },
   {
-    name: "CS50's Intro to AI with Python",
-    issuer: "Harvard University (CS50)",
+    name: "CS50's Introduction to Artificial Intelligence with Python",
+    issuer: "CS50",
     date: "Jun 2024",
-    link: "https://cs50.harvard.edu/certificates/369082c8-2613-460c-9444-ab452734ea00"
+    link: "#"
   },
   {
-    name: "CS50's Intro to Programming with Python",
-    issuer: "Harvard University (CS50)",
+    name: "CS50's Introduction to Programming with Python",
+    issuer: "CS50",
     date: "May 2024",
     link: "#"
   },
@@ -26,31 +27,31 @@ const certifications = [
     name: "Certified Ethical Hacker (CEH)",
     issuer: "Infosys Springboard",
     date: "Mar 2024",
-    link: "https://verify.onwingspan.com/"
+    link: "#"
   },
   {
-    name: "Intro to Generative AI",
-    issuer: "Google Cloud",
+    name: "Introduction to Generative AI",
+    issuer: "Google",
     date: "Mar 2024",
-    link: "https://www.cloudskillsboost.google/public_profiles/8267dbad-4cda-4a76-8628-76365ce14cd0/badges/8478874"
+    link: "#"
   },
   {
-    name: "Intro to Large Language Models",
-    issuer: "Google Cloud",
+    name: "Introduction to Large Language Models",
+    issuer: "Google",
     date: "Mar 2024",
-    link: "https://www.cloudskillsboost.google/public_profiles/8267dbad-4cda-4a76-8628-76365ce14cd0/badges/8479289"
+    link: "#"
   },
   {
-    name: "Web Development Bootcamp 2024",
-    issuer: "Udemy (Dr. Angela Yu)",
+    name: "The complete 2024 web development bootcamp",
+    issuer: "Udemy",
     date: "Mar 2024",
-    link: "https://www.udemy.com/certificate/UC-5b04883f-0d98-4ac9-9765-49a62ad8ad50"
+    link: "#"
   },
   {
     name: "Full Stack Development: Introduction",
     issuer: "Skillsoft",
     date: "Feb 2024",
-    link: "https://www.skillsoft.com"
+    link: "#"
   },
   {
     name: "Full Stack Software Developer Assessment",
@@ -65,15 +66,15 @@ const certifications = [
     link: "#"
   },
   {
-    name: "Python for Beginners",
+    name: "Python for Beginners: Learn Python Programming (Python 3)",
     issuer: "Infosys Springboard",
     date: "Feb 2024",
     link: "#"
   },
   {
-    name: "Introduction to Microsoft Excel",
+    name: "Introduction to Microsoft Excel   by Coursera Project Network and offered through Coursera",
     issuer: "Coursera",
-    date: "Jan 2024",
+    date: "Jan 2024 · Expires Jan 2034",
     link: "#"
   },
   {
@@ -89,7 +90,7 @@ const certifications = [
     link: "#"
   },
   {
-    name: "Python (Basic)",
+    name: "HackerRank Certificates Python (Basic)",
     issuer: "HackerRank",
     date: "Dec 2023",
     link: "#"
@@ -101,25 +102,25 @@ const certifications = [
     link: "#"
   },
   {
-    name: "Introduction to Cybersecurity",
-    issuer: "Cisco",
+    name: "Introduction to Cybersecurity course.",
+    issuer: "Cisco Networking Academy",
     date: "Sep 2023",
     link: "#"
   },
   {
-    name: "Network Support and Security",
-    issuer: "Cisco",
+    name: "Network Support and Security course",
+    issuer: "Cisco Networking Academy",
     date: "Sep 2023",
     link: "#"
   },
   {
-    name: "Networking Basics",
-    issuer: "Cisco",
+    name: "Networking Basics course.",
+    issuer: "Cisco Networking Academy",
     date: "Sep 2023",
     link: "#"
   },
   {
-    name: "Programming in C",
+    name: "Programming in C Certification",
     issuer: "CodeChef",
     date: "Aug 2023",
     link: "#"
@@ -128,7 +129,7 @@ const certifications = [
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24">
+    <section id="certifications" className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <motion.div
            initial={{ opacity: 0, y: 20 }}
@@ -164,6 +165,10 @@ export default function Certifications() {
               </div>
             </motion.div>
           ))}
+        </div>
+        
+        <div className="mt-16 flex justify-center w-full">
+            <RatingInteraction />
         </div>
       </div>
     </section>
